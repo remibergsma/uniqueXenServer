@@ -13,6 +13,7 @@ case "$1" in
     bash /opt/xenserver_make_unique.sh
     chkconfig xenserver_make_unique off
     rm -f /etc/init.d/xenserver_make_unique
+    reboot
   ;;
   stop|status|restart|reload|force-reload)
     # do nothing

@@ -31,4 +31,4 @@ sleep 10
 /opt/xensource/libexec/create_templates
 echo yes | /opt/xensource/bin/xe-reset-networking --device=eth0 --mode=dhcp
 sleep 20
-reboot
+echo "Please reboot if you need to"
