@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script to fix hostname and uuid after deploying Xenserver 6.2/6.5
-# Developed by several Schuberg Philis colleagues
+# Developed by several Schuberg Philis colleagues and supported by friends ;)
 
 service xapi stop
 
