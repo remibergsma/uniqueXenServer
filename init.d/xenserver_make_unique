@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# XenServer Make Unique Host init.d script
+#
+# chkconfig: 2345 24 20
+# description: This makes every xen host unique by randomizing its host uuid
+#              Copy this script to /etc/init.d/xenserver_make_unique and
+#              the actual script to /opt/xenserver_make_unique.sh and run:
+#                  chkconfig xenserver_make_unique on
+
+case "$1" in
+  start)
+    chkconfig xenserver_make_unique off
+    rm -f /etc/init.d/xenserver_make_unique
+    bash /opt/xenserver_make_unique.sh
+  ;;
+  stop|status|restart|reload|force-reload)
+    # do nothing
+  ;;
+esac
+
