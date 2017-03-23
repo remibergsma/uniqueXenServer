@@ -21,6 +21,11 @@ mv -f "${cert}" "${cert_backup}"
 /opt/xensource/libexec/generate_ssl_cert "${cert}" `hostname -f`
 /etc/init.d/xapissl start
 
+# Recreate the ovs database for a unique uuid
+/etc/init.d/openvswitch stop 
+rm -f /etc/openvswitch/conf.db*
+/etc/init.d/openvswitch start
+
 # This is our fix script
 cat <<EOT >> /etc/rc.local.fix
 # Remove us from rc.local
