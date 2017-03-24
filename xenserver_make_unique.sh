@@ -13,6 +13,19 @@ sed -i "/CONTROL_DOMAIN_UUID/c\CONTROL_DOMAIN_UUID='$(uuidgen)'" /etc/xensource-
 rm -rf  /var/xapi/state.db
 service xapi start
 
+# Regenerate self-signed ssl certificate
+/etc/init.d/xapissl stop
+cert="/etc/xensource/xapi-ssl.pem"
+cert_backup="${cert}.`date -u +%Y%m%dT%TZ`"
+mv -f "${cert}" "${cert_backup}"
+/opt/xensource/libexec/generate_ssl_cert "${cert}" `hostname -f`
+/etc/init.d/xapissl start
+
+# Recreate the ovs database for a unique uuid
+/etc/init.d/openvswitch stop 
+rm -f /etc/openvswitch/conf.db*
+/etc/init.d/openvswitch start
+
 # This is our fix script
 cat <<EOT >> /etc/rc.local.fix
 # Remove us from rc.local
